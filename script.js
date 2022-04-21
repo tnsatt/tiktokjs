@@ -8,6 +8,8 @@
 // @icon         data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==
 // @grant        none
 // @run-at       document-start
+// @exclude      */login*
+// @exclude      */signup*
 // ==/UserScript==
 
 (function() {
@@ -42,6 +44,8 @@
          --span-bg:black; --hover-bg:#060716;}
          *{color:white !important;}
          ::placeholder {color: white;opacity: 1;}:-ms-input-placeholder {color: white;}::-ms-input-placeholder {color: white;}
+         [class*="tiktok-app-container"] *{color:black !important;}
+
          body, [class*="DivBrowserModeContainer"] [class*="DivContentContainer"], [class*="DivBrowserModeContainer"] [class*="DivCommentListContainer"],
          [class*="DivBrowserModeContainer"] [class*="DivBottomCommentContainer"], [class*="DivLiveDiscoverPage"], [class*="DivLiveRoomBanner"], [class*="DivChatRoomBody"],
          [class*="DivChatRoom"], [class*="DivChatRoomContainer"], [class*="DivCommentContainer"],
@@ -88,7 +92,7 @@
          {background-color:var(--input-bg) !important;}
 
          .conversation-list-item-wrapper, .change-video-btn, .preview-v2, [class*="IActionButton"], [class*="download-row-block"], [class*="download-row-block"] button:disabled,
-         button:disabled, [class*="tiktok-app-container"]
+         button:disabled
          {background-color:transparent !important}
 
          [class*="InputNum"]
