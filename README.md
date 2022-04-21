@@ -3,6 +3,5 @@ TikTok Multi Column + Darkmode For Web Version (Tampermonkey)
 
 # Darkmode is Beta and updating...
 Some elements background not work in darkmode (white background, no text)<br/>
-Recommend use darkmode only in homepage, folowing page<br/>
 
 ![Alt text](/screenshot.png?raw=true "Screenshot")
