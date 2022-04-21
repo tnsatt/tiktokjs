@@ -1,8 +1,8 @@
 // ==UserScript==
-// @name         TikTok Multi Column + Darkmode By Khongoton
+// @name         TikTok Multi Column + Darkmode By Tnsatt
 // @namespace    http://tampermonkey.net/
 // @version      0.1
-// @description  TikTok MultiColumn + Darkmode By Khongoton
+// @description  TikTok MultiColumn + Darkmode By Tnsatt
 // @author       You
 // @match        http*://www.tiktok.com/*
 // @icon         data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==
