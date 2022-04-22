@@ -8,6 +8,7 @@
 // @icon         data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==
 // @grant        none
 // @run-at       document-start
+// @noframes
 // @exclude      */login*
 // @exclude      */signup*
 // @exclude      */upload*
