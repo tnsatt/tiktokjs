@@ -10,6 +10,7 @@
 // @run-at       document-start
 // @exclude      */login*
 // @exclude      */signup*
+// @exclude      */upload*
 // ==/UserScript==
 
 (function () {
