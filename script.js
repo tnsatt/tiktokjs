@@ -36,18 +36,6 @@
             run_script();
         })
     }
-    function waitHead(callback){
-        wait();
-        function wait(){
-            if(document.head){
-                callback();
-                return;
-            }
-            setTimeout(function(){
-                wait();
-            }, 100);
-        }
-    }
     function run_script() {
         let multicol_style = (`
         [class*="DivBodyContainer"]{min-width:100% !important;}
@@ -169,13 +157,13 @@
             let val = window.multicol_on;
             let elm=document.getElementById("multicol");
             if(elm) elm.remove();
-            document.head.insertAdjacentHTML("beforeend", "<style " + (val ? "" : "type='text'") + " id='multicol'>" + multicol_style + "</style>");
+            createStyle(multicol_style, "multicol", !val);
         }
         function setup_darkmode() {
             let val = window.darkmode_on;
             let elm=document.getElementById("darkmode");
             if(elm) elm.remove();
-            document.head.insertAdjacentHTML("beforeend", "<style " + (val ? "" : "type='text'") + " id='darkmode'>" + darkmode_style + "</style>");
+            createStyle(darkmode_style, "darkmode", !val);
             if(!isext){
                 let elm = document.createElement("input");
                 elm.type = "checkbox";
@@ -210,8 +198,32 @@
             localStorage.setItem("multicol_on", val ? 1 : 0);
         }
     }
-
+    function createStyle(css, id=null, disable=false){
+        let style = document.createElement('style');
+        if(id) style.id= id;
+        document.head.appendChild(style);
+        if(disable){
+            style.setAttribute("type", "text");
+        }
+        if (style.styleSheet){
+            style.styleSheet.cssText = css;
+        } else {
+            style.appendChild(document.createTextNode(css));
+        }
+    }
     function addstyle(style) {
         document.head.insertAdjacentHTML("beforeend", "<style>" + style + "</style>");
+    }
+    function waitHead(callback){
+        wait();
+        function wait(){
+            if(document.head){
+                callback();
+                return;
+            }
+            setTimeout(function(){
+                wait();
+            }, 100);
+        }
     }
 })();
