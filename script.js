@@ -130,7 +130,7 @@
          }
 
          .conversation-list-item-wrapper, .change-video-btn, .preview-v2, [class*="IActionButton"], [class*="download-row-block"], [class*="download-row-block"] button:disabled,
-         button:disabled, [data-e2e="user-page"] [class*="DivContainer"], [data-e2e="browse-user-avatar"] [class*="DivContainer"],
+         button:disabled, [class*="DivShareInfo"] [class*="DivContainer"], [data-e2e="browse-user-avatar"] [class*="DivContainer"],
          [data-e2e="search-user-avatar"] [class*="DivContainer"]
          {background-color:transparent !important}
 
