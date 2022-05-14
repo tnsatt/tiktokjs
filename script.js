@@ -17,7 +17,7 @@
 (function () {
     'use strict';
     console.log("content")
-    let isext=true;
+    let isext=false;
     if (window.darkmode_on === undefined) window.darkmode_on = localStorage.getItem("darkmode_on") !== "0";
     else {
         isext=true;
@@ -43,11 +43,13 @@
         [class*="DivMainContainer"]{margin-bottom:40px;max-width:none !important;width:fit-content !important; flex:1 1 auto !important;}
         [class*="DivMainContainer"] >div{display:flex !important;flex-wrap:wrap !important;justify-content:space-around;}
         [class*="DivMainContainer"] [data-e2e="recommend-list-item-container"]{width:fit-content !important;max-width:none !important;display:flex !important;flex-direction: row-reverse;margin-left:4px;margin-right:4px;position:relative;}
+        [class*="DivMainContainer"] > [class*="DivVideoDetailContainer"]{display:block !important;}
 
-
-        [class*="DivMainContainer"] div:not([class*="DivBrowserModeContainer"]) > [class*="DivContentContainer"]{height:100%;width:fit-content !important;display:flex;flex-direction:column;}
+        [class*="DivMainContainer"] div:not([class*="DivBrowserModeContainer"]) > [class*="DivContentContainer"]{height:100%;width:fit-content;display:flex;flex-direction:column;}
+        [class*="DivVideoDetailContainer"] > [class*="DivContentContainer"] {flex-direction: row !important; width: auto !important;}
         [class*="DivMainContainer"] [class*="DivTextInfoContainer"]{max-width:250px !important;margin-right:auto !important;}
         [class*="DivActionItemContainer"]{bottom:30px; position:absolute; left:100%; margin-left:5px;}
+        [class*="DivVideoDetailContainer"] > [class*="DivContentContainer"] [class*="DivActionItemContainer"]{left: auto !important;}
 
         [class*="DivMainContainer"] [class*="DivVideoWrapper"]{min-height:50%;max-width:100%;position:relative;margin-top:auto;}
         [class*="DivMainContainer"] [class*="DivVideoCardContainer"]{margin-right:0px !important;}
@@ -64,7 +66,7 @@
         let darkmode_style = (`
          body{--dm-bg:#161722; --main-bg:#060716; --pop-bg:#060716, --menu-bg:#060716; --dm-bg-container:#3d4b5f; --btn-bg: #252632; --input-bg: #252632;
          --span-bg:black; --hover-bg:#060716;}
-         *{color:white !important;}
+         *, *::before, *::after{color:white !important;}
          ::placeholder {color: white;opacity: 1;}:-ms-input-placeholder {color: white;}::-ms-input-placeholder {color: white;}
          [class*="tiktok-app-container"] *{color:black !important;}
 
@@ -88,7 +90,8 @@
          [class*="FormReport"], [class*="FormReport"] [class*="DivFooter"], [class*="DivModalContainer"] [class*="DivContentContainer"]>[class*="Container"],
          [class*="DivKeyboardShortcutContainer"], [class*="tiktok-web-header"], [class*="tiktok-web-body-modal"],[class*="footer-bottom-wrapper"],
          [class*="DivItemBackground"],  [class*="DivContainer"], [class*="DivCashierPage"], [class*="DivCashierPage"] div, [class*="FooterContainer"], [class*="keyboard-shortcut-container"],
-         [class*="-modal__modal-wrapper"], [class*="DivFormBox"], [class*="DivModalContainer"] [class*="DivWapper"]
+         [class*="-modal__modal-wrapper"], [class*="DivFormBox"], [class*="DivModalContainer"] [class*="DivWapper"],
+         [class*="DivPromotionContainer"] [class*="DivExpandContainer"], [role="tooltip"]
          {background-color:var(--main-bg) !important;}
 
          [class*="DivProfileContainer"] [data-e2e="user-card-follow"],
@@ -98,7 +101,7 @@
 
          .area-list-container, form[class*="download-wrapper"], .is-helpful-container button, [data-e2e="nav-login-button"], [class*="SendCode"], [class*="login-button"],
          .tiktok-select-selector, .tiktok-select-dropdown, .tiktok-select-dropdown-item, [class*="StyledPayButton"], [class*="ButtonGetAppText"],
-         [class*="ButtonC"], .open_anyway_btn
+         [class*="ButtonC"], .open_anyway_btn, [class*="StyledEditButton"], [class*="Button-StyledBtn"], [class*="DivErrorContainer"] [class*="Button-StyledButton"]
          {background:var(--btn-bg) !important}
 
          [class*="StyledMessageButton"]{background:var(--main-bg) !important;}
@@ -110,7 +113,7 @@
          {background-color: var(--input-bg);}
 
          input, textarea, [class*="DivOptionsWarpper"], [class*="switch__switch-wrapper"], .tiktok-switch__switch-wrapper, [class*="OptionsContainer"],
-         [class*="InputNum"], .message-container .text-container, .emojiSelectPopoverGroupList
+         [class*="InputNum"], .message-container .text-container, .emojiSelectPopoverGroupList, [class*="DivSelectorContainer"]
          {background-color:var(--input-bg) !important;}
 
          .editor-container .comment-input-inner-wrapper, .editor-container [contenteditable="true"], .editor-container span{
@@ -119,13 +122,14 @@
 
          .conversation-list-item-wrapper, .change-video-btn, .preview-v2, [class*="IActionButton"], [class*="download-row-block"], [class*="download-row-block"] button:disabled,
          button:disabled, [class*="DivShareInfo"] [class*="DivContainer"], [data-e2e="browse-user-avatar"] [class*="DivContainer"],
-         [data-e2e="search-user-avatar"] [class*="DivContainer"]
+         [data-e2e="search-user-avatar"] [class*="DivContainer"], [data-e2e="like-icon"] [class*="DivContainer"], [class*="DivAgreement"],
+         [class*="DivProfileBanner"] [class*="DivProfileContainer"]
          {background-color:transparent !important}
 
          [class*="InputNum"]
          {background-color:var(--input-bg) !important;}
 
-
+         [data-e2e="browse-video-desc"], [class*="DivLoginBar"] {background-color:var(--dm-bg) !important;}
          [data-e2e="browse-video"] {background-color:black;}
          .button-row button, label[role="radio"] > div{background-color:#252632 !important}
          [data-e2e="report-card-reason"]:hover{background-color:var(--btn-bg) !important}
@@ -146,24 +150,26 @@
          [data-e2e="search-user-container"]:hover {background-color:var(--main-bg) !important;}
          [class*="DivMainContainer"] [class*="StyledFollowButton"]{}
          html ::-webkit-scrollbar-thumb, html *::-webkit-scrollbar-thumb{background-color: white !important;}
+         ::-webkit-input-placeholder{color: gray !important;} :-ms-input-placeholder{color: gray !important;} ::placeholder{color: gray !important;}
+         ::-ms-input-placeholder{color: gray !important;} ::-moz-placeholder{color: gray !important;} :-moz-placeholder{color: gray !important;}
          `)
         setup_darkmode();
         setup_multicol();
-       
+
         function setup_multicol(){
-            window.addEventListener("scroll", function () {
-                document.documentElement.dispatchEvent(new CustomEvent('scroll'));
-            })
             let val = window.multicol_on;
-            let elm=document.getElementById("multicol");
-            if(elm) elm.remove();
-            createStyle(multicol_style, "multicol", !val);
+            let elm=document.getElementById("multicolstyle");
+            if(!elm){
+                createStyle(multicol_style, "multicolstyle", !val);
+            }
+            // window.addEventListener("scroll", function () {
+            //     document.documentElement.dispatchEvent(new CustomEvent('scroll'));
+            // })
         }
         function setup_darkmode() {
             let val = window.darkmode_on;
-            let elm=document.getElementById("darkmode");
-            if(elm) elm.remove();
-            createStyle(darkmode_style, "darkmode", !val);
+            let elm=document.getElementById("darkmodestyle");
+            if(!elm) createStyle(darkmode_style, "darkmodestyle", !val);
             if(!isext){
                 let elm = document.createElement("input");
                 elm.type = "checkbox";
@@ -180,7 +186,7 @@
             }
         }
         window.set_darkmode = function(val) {
-            let elm = document.querySelector("style#darkmode")
+            let elm = document.querySelector("style#darkmodestyle")
             if (val) {
                 elm.removeAttribute("type");
             } else {
@@ -189,7 +195,7 @@
             localStorage.setItem("darkmode_on", val ? 1 : 0);
         }
         window.set_multicol = function(val) {
-            let elm = document.querySelector("style#multicol")
+            let elm = document.querySelector("style#multicolstyle")
             if (val) {
                 elm.removeAttribute("type");
             } else {
